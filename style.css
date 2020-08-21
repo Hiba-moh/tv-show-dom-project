@@ -1,3 +1,106 @@
+body{
+  margin:0;
+  padding:0;
+  background-color: #363636;
+}
+nav{
+  display:flex;
+  justify-content: space-between;
+  padding: 10px 90px;
+  background-color: #CCA43B;
+}
+#nav-logo{
+font-family: fantasy;
+padding:22px 20px;
+font-size: 24px;
+font-weight: bold;
+text-transform: uppercase;
+color: #242F40;
+
+}
+#nav-Search{
+  padding:22px 20px;
+  margin:0;  
+}
+
+#select,button,#textBox{
+  padding: 8px 12px;
+  color: #E5E5E5;
+  background-color:#242F40 ;
+  border: 1px solid #E5E5E5 ;
+  border-radius: 6px;
+}
+#select{
+
+}
+#select,button{
+  cursor: pointer;
+}
+::-webkit-scrollbar{
+  background-color: #161D27;
+    width: 15px;
+}
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(#33445B, #E5E5E5);
+  /* background:red; */
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(135deg, #CCA43B 50%, #363636);
+}
+
+
+#textBox,#select:focus,#select:hover,button:hover{
+outline: none;
+border:1px solid #363636;
+}
+#textBox{
+color: #242F40;
+background-color: #E5E5E5 ;
+}
+
+
 #root {
-  color: red;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+   padding:22px 20px;
+  font-size: 1.3rem;
+   color: #C2C2C2;
+}
+.divClass{
+  text-align: center;
+  background-color:#242F40;
+  width:  320px;
+  height: 500px;
+  border: 1px solid #161D27;
+  border-radius: 6px;
+  box-shadow: 5px 15px 25px black;
+  margin: 10px;
+}
+.h4class{
+  border-radius: 6px  6px 0 0;
+  margin-top: 0;
+  padding:15px 5px;
+width: 310px;
+height: 25px;
+color: white;
+background-color: #161D27;
+border:1px solid #161D27;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+font-weight: 100;
+}
+.imgClass{
+  border-radius: 6px;
+  width:300px;
+  height: 170px;
+ 
+  
+}
+.descClass{
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: left;
+  text-justify: auto;
+  font-size: 1.05rem;
 }

@@ -9,8 +9,22 @@
   </head>
 
   <body>
-    <div id="root">
+    <div id="wrap">
+      <nav>
+        <div id="nav-logo">TV show DOM project</div>
+        <div id="nav-Search">
+          <select id="select"> 
+            <option value="default">-------------------- Select -------------------- </option>
+          </select>
+          <input id="textBox" type="text" />
+          <button>
+            Search
+          </button>
+        </div>
+      </nav>
     </div>
+
+    <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
