@@ -49,7 +49,7 @@ function makePageForEpisodes (episodeList) {
     select.insertBefore (option, select.lastChild);
   }
   let counter = document.getElementById('counter');
-  counter.textContent = `${episodeList.length} Episode`
+  counter.textContent = `${episodeList.length} Episodes`
 }
 
 window.onload = setup;
@@ -79,10 +79,10 @@ function search (searchTerm) {
     rootElem.textContent = '';
     makePageForEpisodes (filtered);
     let counter = document.getElementById('counter');
-  counter.textContent = `${filtered.length} Episode`
+  counter.textContent = `${filtered.length} Episodes`
   } else {
     rootElem.textContent = 'Sorry no match for your search .. ';
     let counter = document.getElementById('counter');
-  counter.textContent = `0 Episode`
+  counter.textContent = `0 Episodes`
   }
 }
