@@ -12,6 +12,9 @@ nav {
 }
 
 #nav-logo {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 20%;
   /* display: block; */
   font-family: fantasy;
   padding: 22px 20px;
@@ -22,6 +25,12 @@ nav {
 }
 
 #nav-Search {
+  text-align: right;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 75%;
+  align-self: center;
+  
   padding: 22px 0px;
   margin: 0;
 }
@@ -38,10 +47,10 @@ button,
 
 #select {
   text-align: center;
-  width: 50%;
+  width: 32%;
 }
 button{
-  width:80px;
+  width:10%;
 }
 
 #select,
@@ -71,7 +80,7 @@ button {
 #textBox {
   color: #242f40;
   background-color: #e5e5e5;
-  width: 30%;
+  width: 20%;
 }
 
 #root {
