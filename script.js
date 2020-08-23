@@ -1,12 +1,13 @@
 //You can edit ALL of the code here
+const rootElem = document.getElementById ('root');
+var season, episode;
+
 function setup () {
   const allEpisodes = getAllEpisodes ();
   makePageForEpisodes (allEpisodes);
 }
 
 function makePageForEpisodes (episodeList) {
-  var season, episode;
-  const rootElem = document.getElementById ('root');
   for (let i = 0; i < episodeList.length; i++) {
     if (episodeList[i].season < 10) {
       season = '0' + episodeList[i].season;
@@ -28,7 +29,6 @@ function makePageForEpisodes (episodeList) {
     div.appendChild (text);
     div.appendChild (img);
     div.appendChild (desc);
-
     rootElem.appendChild (div);
   }
   // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
@@ -42,21 +42,47 @@ function makePageForEpisodes (episodeList) {
     }
     var option = document.createElement ('option');
     text = document.createTextNode (
-      `${episodeList[i].name} - S${season}E${episode}`
+      ` S${season}E${episode} - ${episodeList[i].name} `
     );
     option.setAttribute ('value', episodeList[i].name);
     option.appendChild (text);
     select.insertBefore (option, select.lastChild);
   }
-
-//   var inputBox = document.getElementById('textBox');
-//   for(i=0;i<episodeList.length;i++){
-//  inputBox.addEventListener('keypress',function(e){
-   
-//   })
-
-//   }
- 
+  let counter = document.getElementById('counter');
+  counter.textContent = `${episodeList.length} Episode`
 }
 
 window.onload = setup;
+
+var inputBox = document.getElementById ('textBox');
+inputBox.addEventListener ('keyup', function (e) {
+  search (e.target.value.toLowerCase ());
+});
+
+var selectBox = document.getElementById ('select');
+const allEpisodes = getAllEpisodes ();
+selectBox.addEventListener ('change', function (e) {
+  if (e.target.value === 'default') {
+    makePageForEpisodes (allEpisodes);
+  } else search (e.target.value.toLowerCase ());
+});
+
+function search (searchTerm) {
+  const allEpisodes = getAllEpisodes ();
+  let filtered = allEpisodes.filter (episode => {
+    return (
+      episode.name.toLowerCase ().includes (searchTerm) ||
+      episode.summary.toLowerCase ().includes (searchTerm)
+    );
+  });
+  if (filtered.length > 0) {
+    rootElem.textContent = '';
+    makePageForEpisodes (filtered);
+    let counter = document.getElementById('counter');
+  counter.textContent = `${filtered.length} Episode`
+  } else {
+    rootElem.textContent = 'Sorry no match for your search .. ';
+    let counter = document.getElementById('counter');
+  counter.textContent = `0 Episode`
+  }
+}
