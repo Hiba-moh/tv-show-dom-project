@@ -12,9 +12,9 @@ function makePageForEpisodes (episodeList) {
     if (episodeList[i].season < 10) {
       season = '0' + episodeList[i].season;
     }
-    if (episodeList[i].number < 10) {
-      episode = '0' + episodeList[i].number;
-    }
+    // if (episodeList[i].number < 10) {
+    //   episode = '0' + episodeList[i].number;
+    // }
     div = document.createElement ('div');
     text = document.createElement ('h5');
     text.textContent = `${episodeList[i].name} - S${season}E${episode}`;
