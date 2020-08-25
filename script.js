@@ -37,9 +37,9 @@ function makePageForEpisodes (episodeList) {
     if (episodeList[i].season < 10) {
       season = '0' + episodeList[i].season;
     }
-    if (episodeList[i].number < 10) {
-      episode = '0' + episodeList[i].number;
-    }
+    // if (episodeList[i].number < 10) {
+    //   episode = '0' + episodeList[i].number;
+    // }
     var option = document.createElement ('option');
     text = document.createTextNode (
       ` S${season}E${episode} - ${episodeList[i].name} `
