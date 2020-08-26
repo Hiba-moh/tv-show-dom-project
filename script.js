@@ -1,23 +1,25 @@
 //You can edit ALL of the code here
 const rootElem = document.getElementById ('root');
-var season, episode;
-
 function setup () {
   const allEpisodes = getAllEpisodes ();
   makePageForEpisodes (allEpisodes);
 }
 
+/**************************************************************************************************************
+                                             creating my page HTML-elements
+/**************************************************************************************************************/
+
 function makePageForEpisodes (episodeList) {
   for (let i = 0; i < episodeList.length; i++) {
     if (episodeList[i].season < 10) {
-      season = '0' + episodeList[i].season;
+      episodeList[i].season = '0' + episodeList[i].season;
     }
-    // if (episodeList[i].number < 10) {
-    //   episode = '0' + episodeList[i].number;
-    // }
+    if (episodeList[i].number < 10) {
+      episodeList[i].number = '0' + episodeList[i].number;
+    }
     div = document.createElement ('div');
     text = document.createElement ('h5');
-    text.textContent = `${episodeList[i].name} - S${season}E${episode}`;
+    text.textContent = `${episodeList[i].name} - S${episodeList[i].season}E${episodeList[i].number}`;
     text.setAttribute ('class', 'h4class');
     img = document.createElement ('img');
     img.setAttribute ('src', episodeList[i].image.medium);
@@ -31,42 +33,34 @@ function makePageForEpisodes (episodeList) {
     div.appendChild (desc);
     rootElem.appendChild (div);
   }
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  /*************************************************************************************************************** 
+                                             Building the select menu
+  /***************************************************************************************************************/
   var select = document.getElementById ('select');
   for (let i = 0; i < episodeList.length; i++) {
-    if (episodeList[i].season < 10) {
-      season = '0' + episodeList[i].season;
-    }
-    // if (episodeList[i].number < 10) {
-    //   episode = '0' + episodeList[i].number;
-    // }
     var option = document.createElement ('option');
     text = document.createTextNode (
-      ` S${season}E${episode} - ${episodeList[i].name} `
+      ` S${episodeList[i].season}E${episodeList[i].number} - ${episodeList[i].name} `
     );
     option.setAttribute ('value', episodeList[i].name);
     option.appendChild (text);
     select.insertBefore (option, select.lastChild);
   }
-  let counter = document.getElementById('counter');
-  counter.textContent = `${episodeList.length} Episodes`
+  /****************************************************************************************************************
+                                             Episodes Conter Button
+/****************************************************************************************************************/
+
+  let counter = document.getElementById ('counter');
+  counter.textContent = `${episodeList.length} Episode(s)`;
 }
-
-window.onload = setup;
-
+/****************************************************************************************************************
+                                              Search Text Box 
+/****************************************************************************************************************/
 var inputBox = document.getElementById ('textBox');
 inputBox.addEventListener ('keyup', function (e) {
   search (e.target.value.toLowerCase ());
 });
-
-var selectBox = document.getElementById ('select');
-const allEpisodes = getAllEpisodes ();
-selectBox.addEventListener ('change', function (e) {
-  if (e.target.value === 'default') {
-    makePageForEpisodes (allEpisodes);
-  } else search (e.target.value.toLowerCase ());
-});
-
+// search box function
 function search (searchTerm) {
   const allEpisodes = getAllEpisodes ();
   let filtered = allEpisodes.filter (episode => {
@@ -78,11 +72,29 @@ function search (searchTerm) {
   if (filtered.length > 0) {
     rootElem.textContent = '';
     makePageForEpisodes (filtered);
-    let counter = document.getElementById('counter');
-  counter.textContent = `${filtered.length} Episodes`
+    let counter = document.getElementById ('counter');
+    counter.textContent = `${filtered.length} Episode(s)`;
   } else {
     rootElem.textContent = 'Sorry no match for your search .. ';
-    let counter = document.getElementById('counter');
-  counter.textContent = `0 Episodes`
+    let counter = document.getElementById ('counter');
+    counter.textContent = `0 Episode(s)`;
   }
 }
+/****************************************************************************************************************
+                                     Select menu- Displaying the exact episode from the list
+/****************************************************************************************************************/
+var selectBox = document.getElementById ('select');
+const allEpisodes = getAllEpisodes ();
+selectBox.addEventListener ('change', function (e) {
+  if (e.target.value === 'default') {
+    makePageForEpisodes (allEpisodes);
+  } else {
+    rootElem.textContent = '';
+    let episodes = allEpisodes.filter (function (item) {
+      return item.name === e.target.value;
+    });
+    makePageForEpisodes (episodes);
+  }
+});
+/******************************************************************************************************************/
+window.onload = setup;
