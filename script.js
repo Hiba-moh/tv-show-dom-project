@@ -87,6 +87,7 @@ var selectBox = document.getElementById ('select');
 const allEpisodes = getAllEpisodes ();
 selectBox.addEventListener ('change', function (e) {
   if (e.target.value === 'default') {
+    rootElem.textContent='';
     makePageForEpisodes (allEpisodes);
   } else {
     rootElem.textContent = '';
