@@ -2,7 +2,17 @@
 const rootElem = document.getElementById ('root');
 function setup () {
   const allEpisodes = getAllEpisodes ();
+  for (let i = 0; i < allEpisodes.length; i++) {
+    if (allEpisodes[i].season < 10) {
+      allEpisodes[i].season = '0' + allEpisodes[i].season;
+    }
+    if (allEpisodes[i].number < 10) {
+      allEpisodes[i].number = '0' + allEpisodes[i].number;
+    }
+  }
+  select(allEpisodes);
   makePageForEpisodes (allEpisodes);
+
 }
 
 /**************************************************************************************************************
@@ -10,15 +20,11 @@ function setup () {
 /**************************************************************************************************************/
 
 function makePageForEpisodes (episodeList) {
+
   for (let i = 0; i < episodeList.length; i++) {
-    if (episodeList[i].season < 10) {
-      episodeList[i].season = '0' + episodeList[i].season;
-    }
-    if (episodeList[i].number < 10) {
-      episodeList[i].number = '0' + episodeList[i].number;
-    }
     div = document.createElement ('div');
     text = document.createElement ('h5');
+    
     text.textContent = `${episodeList[i].name} - S${episodeList[i].season}E${episodeList[i].number}`;
     text.setAttribute ('class', 'h4class');
     img = document.createElement ('img');
@@ -36,22 +42,28 @@ function makePageForEpisodes (episodeList) {
   /*************************************************************************************************************** 
                                              Building the select menu
   /***************************************************************************************************************/
-  var select = document.getElementById ('select');
-  for (let i = 0; i < episodeList.length; i++) {
-    var option = document.createElement ('option');
-    text = document.createTextNode (
-      ` S${episodeList[i].season}E${episodeList[i].number} - ${episodeList[i].name} `
-    );
-    option.setAttribute ('value', episodeList[i].name);
-    option.appendChild (text);
-    select.insertBefore (option, select.lastChild);
-  }
+ 
+
   /****************************************************************************************************************
                                              Episodes Conter Button
 /****************************************************************************************************************/
 
   let counter = document.getElementById ('counter');
   counter.textContent = `${episodeList.length} Episode(s)`;
+}
+
+/****************************************************************************************************************/
+function select(episodeList){
+var select = document.getElementById ('select');
+for (let i = 0; i < episodeList.length; i++) {
+  var option = document.createElement ('option');
+  text = document.createTextNode (
+    ` S${episodeList[i].season}E${episodeList[i].number} - ${episodeList[i].name} `
+  );
+  option.setAttribute ('value', episodeList[i].name);
+  option.appendChild (text);
+  select.insertBefore (option, select.lastChild);
+}
 }
 /****************************************************************************************************************
                                               Search Text Box 

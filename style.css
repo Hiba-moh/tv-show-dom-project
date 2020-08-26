@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: #363636;
+  position: relative;
+  min-height: 100vh;
 }
 
 nav {
@@ -17,7 +19,7 @@ nav {
   flex-basis: 20%;
   /* display: block; */
   font-family: fantasy;
-  padding: 22px 20px;
+  padding: 1.4rem 1.25rem;
   font-size: 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -31,14 +33,14 @@ nav {
   flex-basis: 75%;
   align-self: center;
   
-  padding: 22px 0px;
+  padding: 1.4rem 0rem;
   margin: 0;
 }
 
 #select,
 button,
 #textBox {
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
   color: #e5e5e5;
   background-color: #242f40;
   border: 1px solid #e5e5e5;
@@ -125,11 +127,18 @@ button {
   text-justify: auto;
   font-size: 1.05rem;
 }
+#root{
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+}
 footer {
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+ text-align: center;
   font-size: large;
   font-weight: 400;
-  text-align: center;
   padding-top: 20px;
-  height: 40px;
+  height: 2.5rem;
   background-color: #cca43b;
 }
