@@ -76,9 +76,11 @@ button,
 }
 
 #select {
+  text-transform: uppercase;
   text-align: center;
   width: 350px;
   height: 40px;
+  cursor: pointer;
 }
 button{
   border: none;
@@ -91,10 +93,6 @@ button{
   background-color: #242f40 ;
   width: 320px;
   height: 20px;
-} 
-
-#select{
-  cursor: pointer;
 } 
 
 ::-webkit-scrollbar {
