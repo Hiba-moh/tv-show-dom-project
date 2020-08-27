@@ -81,6 +81,7 @@ button,
   height: 40px;
 }
 button{
+  border: none;
   width:200px;
   height: 40px;
 }
