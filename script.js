@@ -1,7 +1,7 @@
 //You can edit ALL of the code here
 const rootElem = document.getElementById ('root');
+const allEpisodes = getAllEpisodes ();
 function setup () {
-  const allEpisodes = getAllEpisodes ();
   for (let i = 0; i < allEpisodes.length; i++) {
     if (allEpisodes[i].season < 10) {
       allEpisodes[i].season = '0' + allEpisodes[i].season;
@@ -96,7 +96,7 @@ function search (searchTerm) {
                                      Select menu- Displaying the exact episode from the list
 /****************************************************************************************************************/
 var selectBox = document.getElementById ('select');
-const allEpisodes = getAllEpisodes ();
+// const allEpisodes = getAllEpisodes ();
 selectBox.addEventListener ('change', function (e) {
   if (e.target.value === 'default') {
     rootElem.textContent='';
