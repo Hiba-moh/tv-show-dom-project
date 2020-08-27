@@ -136,11 +136,16 @@ button{
   box-shadow: 5px 15px 25px black;
   margin: 10px;
 }
+.divClass:hover{
+  border: 1px solid #cca43b;
+  cursor: pointer;
+  box-shadow: none;
+}
 .h4class {
   border-radius: 6px 6px 0 0;
   margin-top: 0;
   padding: 15px 5px;
-  width: 310px;
+  width: 308px;
   height: 25px;
   color: white;
   background-color: #161d27;
