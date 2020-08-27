@@ -74,7 +74,6 @@ inputBox.addEventListener ('keyup', function (e) {
 });
 // search box function
 function search (searchTerm) {
-  const allEpisodes = getAllEpisodes ();
   let filtered = allEpisodes.filter (episode => {
     return (
       episode.name.toLowerCase ().includes (searchTerm) ||
