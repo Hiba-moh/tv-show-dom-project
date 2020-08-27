@@ -8,25 +8,53 @@ body {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
   padding: 10px 90px;
   background-color: #cca43b;
+  flex-wrap: wrap;
 }
 
 #nav-logo {
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: 20%;
-  /* display: block; */
   font-family: fantasy;
-  padding: 1.4rem 1.25rem;
-  font-size: 1.5rem;
-  font-weight: bold;
   text-transform: uppercase;
   color: #242f40;
+  font-size: 2rem;
+  font-weight: bold;
+  flex-grow: 1;
+  padding: 1.4rem 1.25rem;
+  /* flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 20%;
+  display: block; 
+  
+ 
+ 
+  */
 }
 
-#nav-Search {
+#nav-select{
+  text-align: right;
+  padding: 1.4rem 0rem;
+  margin: 0;
+
+}
+#nav-search{
+  text-align: right;
+  padding: 1.4rem 0rem;
+  margin: 0;
+
+}
+#nav-button{
+  text-align: center;
+  padding: 1.4rem 0rem;
+  margin: 0;
+
+}
+.box{
+  min-width:350px;
+
+}
+/* #nav-Search {
   text-align: right;
   flex-grow: 0;
   flex-shrink: 1;
@@ -35,12 +63,12 @@ nav {
   
   padding: 1.4rem 0rem;
   margin: 0;
-}
+} */
 
-#select,
+ #select,
 button,
 #textBox {
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem; 
   color: #e5e5e5;
   background-color: #242f40;
   border: 1px solid #e5e5e5;
@@ -49,16 +77,24 @@ button,
 
 #select {
   text-align: center;
-  width: 32%;
+  width: 350px;
+  height: 40px;
 }
 button{
-  width:10%;
+  width:200px;
+  height: 40px;
 }
+#textBox {
+  color: white;
+  background-color: #242f40 ;
+  width: 320px;
+  height: 20px;
+} 
 
-#select,
-button {
+#select{
   cursor: pointer;
-}
+} 
+
 ::-webkit-scrollbar {
   background-color: #161d27;
   width: 15px;
@@ -72,18 +108,13 @@ button {
   background: linear-gradient(135deg, #cca43b 50%, #363636);
 }
 
-#textBox,
+ #textBox,
 #select:focus,
 #select:hover{
   outline: none;
   border: 1px solid #363636;
 }
 
-#textBox {
-  color: #242f40;
-  background-color: #e5e5e5;
-  width: 20%;
-}
 
 #root {
   display: flex;
@@ -128,7 +159,7 @@ button {
   font-size: 1.05rem;
 }
 #root{
-  padding-top: 6rem;
+  padding-top: 3rem;
   padding-bottom: 5rem;
 }
 footer {

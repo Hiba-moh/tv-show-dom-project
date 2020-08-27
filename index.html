@@ -11,17 +11,22 @@
   <body>
     <div id="wrap">
       <nav>
-        <div id="nav-logo">TV show DOM project</div>
-        <div id="nav-Search">
+        <div id="nav-logo" class="box">TV show DOM project</div>
+
+        <div id="nav-select" class="box">
           <select id="select">
-            <option value="default"
-              >------------------ All Episodes ------------------
+            <option value="default">
+              ------------------ All Episodes ------------------
             </option>
           </select>
-          <input id="textBox" type="text" />
-          <button id='counter' disabled>
-            Episodes
-          </button>
+        </div>
+
+        <div id="nav-search" class="box">
+          <input id="textBox" type="text"  placeholder=' ------------------------  Search ---------------------- ' />
+        </div>
+
+        <div id="nav-button" class="box">
+          <button id="counter" disabled>Episodes</button>
         </div>
       </nav>
     </div>
