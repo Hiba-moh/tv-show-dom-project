@@ -6,6 +6,11 @@ body {
   min-height: 100vh;
 }
 
+/* #wrap {
+  width: 100%;
+  background-color: lightcoral;
+  position: fixed; 
+} */
 nav {
   display: flex;
   justify-content: center;
@@ -15,7 +20,8 @@ nav {
 }
 
 #nav-logo {
-  font-family: fantasy,'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: fantasy, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+    sans-serif;
   text-transform: uppercase;
   color: #242f40;
   font-size: 2rem;
@@ -60,9 +66,10 @@ button,
   cursor: pointer;
   border: 1px solid #363636;
 }
+#visitors,
 button {
   border: none;
-  width: 200px;
+  width: 120px;
   height: 40px;
   text-transform: uppercase;
 }
@@ -100,9 +107,12 @@ button {
   padding: 22px 20px;
   font-size: 1.3rem;
   color: #c2c2c2;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 .divClass {
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-align: center;
   background-color: #242f40;
   width: 360px;
@@ -143,10 +153,7 @@ button {
   text-justify: auto;
   font-size: 1.05rem;
 }
-#root {
-  padding-top: 3rem;
-  padding-bottom: 5rem;
-}
+
 footer {
   position: absolute;
   bottom: 0;
