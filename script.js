@@ -2,6 +2,9 @@
 const rootElem = document.getElementById ('root');
 const allEpisodes = getAllEpisodes ();
 
+
+/******************************************SETUP STARTS**********************************************************/
+
 function setup () {
   //This code is to add Zero before each episode and season under 10
   for (let i = 0; i < allEpisodes.length; i++) {
@@ -14,7 +17,9 @@ function setup () {
   }
   select (allEpisodes);
   makePageForEpisodes (allEpisodes);
+  updateVisitCount ();
 }
+/******************************************SETUP ENDS**********************************************************/
 
 /**************************************************************************************************************
                                              creating my page HTML-elements
@@ -141,13 +146,11 @@ function myFunction (event) {
 
 const countEl = document.getElementById ('visitors');
 
-updateVisitCount ();
-
 function updateVisitCount () {
-  fetch ('https://cyf-hiba-moh-tv.netlify.app/?amount=1')
+  fetch ('https://api.countapi.xyz/update/cyf-hiba-moh-tv.netlify.app/netlify.app/?amount=1')
     .then (res => res.json ())
     .then (res => {
-      countEl.innerHTML = res.value;
+      countEl.innerHTML = `${res.value} :Views`;
     });
 }
 
