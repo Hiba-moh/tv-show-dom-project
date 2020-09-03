@@ -35,12 +35,16 @@ function makePageForEpisodes (episodeList) {
     img = document.createElement ('img');
     img.setAttribute ('src', episodeList[i].image.medium);
     img.setAttribute ('class', 'imgClass');
+    sumHeader=document.createElement('h5')
+    sumHeader.setAttribute('class','sumClass');
+    sumHeader.textContent ='Summary'
     desc = document.createElement ('p');
     desc.innerHTML = episodeList[i].summary;
     desc.setAttribute ('class', 'descClass');
     div.setAttribute ('class', 'divClass');
     div.appendChild (text);
     div.appendChild (img);
+    div.appendChild(sumHeader)
     div.appendChild (desc);
 
     /*This code gives all of the div elements same id as the episode 
