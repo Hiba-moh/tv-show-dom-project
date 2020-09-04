@@ -90,6 +90,7 @@ function select (episodeList) {
 
 var inputBox = document.getElementById ('textBox');
 inputBox.addEventListener ('keyup', function (e) {
+  selectBox.value="default";
   search (e.target.value.toLowerCase ());
 });
 // search box function
@@ -113,12 +114,13 @@ function search (searchTerm) {
 }
 
 /****************************************************************************************************************
-                                     Select menu- Displaying the exact episode from the list
+                        Select menu- Displaying the exact episode when choosing from the list
 /****************************************************************************************************************/
 
 var selectBox = document.getElementById ('select');
 // const allEpisodes = getAllEpisodes ();
 selectBox.addEventListener ('change', function (e) {
+  inputBox.value='';
   if (e.target.value === 'default') {
     rootElem.textContent = '';
     makePageForEpisodes (allEpisodes);
