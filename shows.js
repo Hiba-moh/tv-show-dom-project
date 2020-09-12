@@ -9,7 +9,7 @@ function getOneShow() {
     url: "http://www.tvmaze.com/shows/82/game-of-thrones",
     name: "Game of Thrones",
     type: "Scripted",
-    language: "English",
+    language: "English", 
     genres: ["Drama", "Adventure", "Fantasy"],
     status: "Ended",
     runtime: 60,

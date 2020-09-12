@@ -1,22 +1,28 @@
 //You can edit ALL of the code here
+
+
 const rootElem = document.getElementById ('root');
-const allEpisodes = getAllEpisodes ();
-
-
+//const allEpisodes = getAllEpisodes ();
+ var allEpisodes;
 /******************************************SETUP STARTS**********************************************************/
 
 function setup () {
+  const allShows = getAllShows();
+  selectShows(allShows);
+  makePageForShows(allShows);
   //This code is to add Zero before each episode and season under 10
-  for (let i = 0; i < allEpisodes.length; i++) {
-    if (allEpisodes[i].season < 10) {
-      allEpisodes[i].season = '0' + allEpisodes[i].season;
-    }
-    if (allEpisodes[i].number < 10) {
-      allEpisodes[i].number = '0' + allEpisodes[i].number;
-    }
-  }
-  select (allEpisodes);
-  makePageForEpisodes (allEpisodes);
+  // for (let i = 0; i < allEpisodes.length; i++) {
+  //   if (allEpisodes[i].season < 10) {
+  //     allEpisodes[i].season = '0' + allEpisodes[i].season;
+  //   }
+  //   if (allEpisodes[i].number < 10) {
+  //     allEpisodes[i].number = '0' + allEpisodes[i].number;
+  //   }
+  // }
+  //select (allEpisodes);
+
+  // getLiveEpisodes(526);
+  //  makePageForEpisodes (allEpisodes);
   updateVisitCount ();
 }
 /******************************************SETUP ENDS**********************************************************/
@@ -68,11 +74,20 @@ function makePageForEpisodes (episodeList) {
 }
 
 /*************************************************************************************************************** 
-                                             Building the select menu
+                                             Building the Episodes select menu
   /***************************************************************************************************************/
 
 function select (episodeList) {
+  for (let i = 0; i < allEpisodes.length; i++) {
+    if (allEpisodes[i].season < 10) {
+      allEpisodes[i].season = '0' + allEpisodes[i].season;
+    }
+    if (allEpisodes[i].number < 10) {
+      allEpisodes[i].number = '0' + allEpisodes[i].number;
+    }
+  }
   var select = document.getElementById ('select');
+  select.textContent='';
   for (let i = 0; i < episodeList.length; i++) {
     var option = document.createElement ('option');
     text = document.createTextNode (
@@ -83,6 +98,36 @@ function select (episodeList) {
     select.insertBefore (option, select.lastChild);
   }
 }
+
+/*************************************************************************************************************** 
+                                             Building the Shows select menu
+  /***************************************************************************************************************/
+
+  function selectShows (allShows) {
+    var select = document.getElementById ('select-shows');
+    for (let i = 0; i < allShows.length; i++) {
+      var option = document.createElement ('option');
+      text = document.createTextNode (
+        `${allShows[i].name} `
+      );
+      option.setAttribute ('value', allShows[i].id);
+      option.appendChild (text);
+      select.insertBefore (option, select.lastChild);
+    }
+  }
+
+  /****************************************************************************************************************
+                        Building The Episode Select menu Depends On The Selected Show 
+                           And Displaying The Selected Show Episodes On the Page
+/****************************************************************************************************************/
+
+var selectBox = document.getElementById ('select-shows');
+// const allEpisodes = getAllEpisodes ();
+selectBox.addEventListener ('change', function (e) {
+  rootElem.textContent='';
+ getLiveEpisodes(e.target.value);
+});
+
 
 /****************************************************************************************************************
                                               Search Text Box 
@@ -160,9 +205,62 @@ function updateVisitCount () {
     });
 }
 
-/******************************************************************************************************************/
-                                    Shows using fetch()
+/*****************************************************************************************************************
+                                    Episodes using fetch()
 /******************************************************************************************************************/
 
+function getLiveEpisodes(showId){
+  fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
+  .then(response=>{
+    return response.json();
+  })
+  .then(data=>{
+    allEpisodes = data;
+    makePageForEpisodes(allEpisodes);
+    select(allEpisodes);
+  })
+  .catch(error=>{
+    alert(error);
+  })
+}
+
+/*****************************************************************************************************************
+                                    Displaying All The Shows On The Page
+/******************************************************************************************************************/
+function makePageForShows(showsList) {
+  rootElem.textContent='';
+  for (let i = 0; i < showsList.length; i++) {
+    div = document.createElement ('div');
+    text = document.createElement ('h5');
+
+    text.textContent = `${showsList[i].name} - S${showsList[i].season}E${showsList[i].number}`;
+    text.setAttribute ('class', 'h4Showclass');
+    img = document.createElement ('img');
+    img.setAttribute ('src', showsList[i].image.medium);
+    img.setAttribute ('class', 'imgShowClass');
+    // sumHeader=document.createElement('h5')
+    // sumHeader.setAttribute('class','sumShowClass');
+    // sumHeader.textContent ='Summary'
+    desc = document.createElement ('p');
+    desc.innerHTML = `SUMMARY ${showsList[i].summary}`;
+    desc.setAttribute ('class', 'descShowClass');
+    div.setAttribute ('class', 'divShowClass');
+    div.appendChild (text);
+    div.appendChild (img);
+    // div.appendChild(sumHeader)
+    div.appendChild (desc);
+
+    /*This code gives all of the div elements same id as the episode 
+    (it makes it easy to grab the episode when it has been clicked)*/
+
+    let keyId = `${showsList[i].id}`;
+    div.id = keyId;
+    text.id = keyId;
+    img.id = keyId;
+    desc.id = keyId;
+    desc.firstChild.id = keyId;
+    rootElem.appendChild (div);
+  }
+}
 
 window.onload = setup;
