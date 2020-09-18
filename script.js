@@ -155,14 +155,16 @@ function selectEpisodes (episodeList) {
   text = document.createTextNode ('ALL EPISODES ...');
   option.setAttribute ('value','default');
     option.appendChild (text);
-    select.insertBefore (option, select.firstChild);
+    select.append(option);
+    // select.insertBefore (option, select.firstChild);
     
   for (let j = 0; j < episodeList.length; j++) {
     var option = document.createElement ('option');
     text = document.createTextNode (` S${episodeList[j].season}E${episodeList[j].number} - ${episodeList[j].name} `);
     option.setAttribute ('value', episodeList[j].name);
     option.appendChild (text);
-    select.insertBefore (option, select.lastChild);
+    // select.insertBefore (option, select.lastChild);
+    select.append(option);
   }
  
 }
