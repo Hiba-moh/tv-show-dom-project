@@ -229,12 +229,20 @@ inputBox.addEventListener ('keyup', function (e) {
 });
 // search box function
 function search (searchTerm) {
+  var select = document.getElementById ('select-shows');
+  getLiveEpisodes(select.value).then(data=>{
+   var allEpisodes=data;
+ 
   let filtered = allEpisodes.filter (episode => {
+    if(episode.summary!=null)
     return (
       episode.name.toLowerCase ().includes (searchTerm) ||
       episode.summary.toLowerCase ().includes (searchTerm)
     );
+    else
+    return  episode.name.toLowerCase ().includes (searchTerm)
   });
+  
   if (filtered.length > 0) {
     rootElem.textContent = '';
     makePageForEpisodes (filtered);
@@ -245,6 +253,7 @@ function search (searchTerm) {
     let counter = document.getElementById ('counter');
     counter.textContent = `0 Episode(s)`;
   }
+})
 }
 
 /****************************************************************************************************************
