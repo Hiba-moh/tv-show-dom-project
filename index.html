@@ -11,31 +11,42 @@
   <body>
     <div id="wrap">
       <nav>
-        <div id="nav-logo" class="box">TV show DOM project</div>
+        <div id="nav-logo" class="box" onclick="setup()">TV show DOM project</div>
 
-        <div id="nav-select-shows" class="box">
-          <select id="select-shows">
-            <option value="default">ALL SHOWS ...</option>
-          </select>
-        </div>
-
-        <div id="nav-select" class="box">
-          <select id="select">
-            <option value="default">ALL EPISODES ...</option>
-          </select>
-        </div>
-       
-
-        <div id="nav-search" class="box">
-          <input id="textBox" type="text" placeholder="  SEARCH FOR EPISODE HERE ..." />
-        </div>
 
         <div id="nav-button" class="box">
-          <button id="counter" disabled>Episodes</button>
-          <button id="visitors" disabled>0 views</button>
+          <button id="counter" disabled>|EPISODE|</button>
+          <button id="visitors" disabled>|0 PAGE VIEWS|</button>
         </div>
       </nav>
     </div>
+
+    
+    <div id="secNav">
+
+      <div id="nav-select-shows" class="box">
+        <select id="select-shows">
+          <option value="default">ALL SHOWS ...</option>
+        </select>
+      </div>
+
+      <div id="nav-select" class="box">
+        <select id="select">
+          <option value="default">ALL EPISODES ...</option>
+        </select>
+      </div>
+
+
+      <div id="nav-search" class="box">
+        <input id="textBox" type="text" placeholder="  SEARCH FOR EPISODE HERE ..." />
+      </div>
+ 
+
+
+    </div>
+
+
+
 
     <div id="root" onclick="myFunction(event)"></div>
 

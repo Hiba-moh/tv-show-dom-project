@@ -44,6 +44,15 @@ function setup () {
 /**************************************************************************************************************
                                              creating my page HTML-elements
 /**************************************************************************************************************/
+function WordCount(str) {
+  let newStr = str.split(' ');
+  let ourStr=[];
+  for(i=0;i<40;i++)
+  {
+        ourStr.push(newStr[i])
+}  
+return ourStr.join(' ');
+}
 
 function makePageForEpisodes (episodeList) {
   for (let i = 0; i < episodeList.length; i++) {
@@ -86,8 +95,13 @@ if(episodeList[i].image){
     sumHeader.setAttribute('class','sumClass');
     sumHeader.textContent ='Summary'
     desc = document.createElement ('p');
+
+    var newSummary = WordCount(episodeList[i].summary); 
+
     if(episodeList[i].summary!='' && episodeList[i].summary!=null){
-    desc.innerHTML = episodeList[i].summary;
+    desc.innerHTML =  newSummary;
+    if((episodeList[i].summary).length > newSummary.length)
+   desc.innerHTML +='Read More '
     }
     else
     desc.innerHTML=`We don't have a summary for ${episodeList[i].name} yet. Hang in there, or go ahead and contribute one.`;
@@ -158,6 +172,10 @@ function selectEpisodes (episodeList) {
   /***************************************************************************************************************/
 
   function selectShows (allShows) {
+    var select = document.getElementById ('select');
+    select.value='default'
+    select.textContent='';
+
     names=[];
     allShows.forEach(element => {
       names.push(element.name);      
@@ -311,7 +329,7 @@ function updateVisitCount () {
   fetch ('https://api.countapi.xyz/update/cyf-hiba-moh-tv.netlify.app/netlify.app/?amount=1')
     .then (res => res.json ())
     .then (res => {
-      countEl.innerHTML = `${res.value} Views`;
+      countEl.innerHTML = `|${res.value} PAGE VIEWS|`;
     });
 }
 
@@ -374,6 +392,12 @@ async function getLiveShows(){
                                     Displaying All The Shows On The Page
 /******************************************************************************************************************/
 function makePageForShows(showsList) {
+  var select = document.getElementById ('select');
+    select.value='default';
+    select.textContent=''
+    var showSelect = document.getElementById ('select-shows');
+    showSelect.value='default';
+
   // console.log(showsList);
   let names=[];
     showsList.forEach(element => {
