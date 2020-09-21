@@ -8,8 +8,8 @@ var allShows = [];
 /******************************************SETUP STARTS**********************************************************/
 
 function setup () {
-  episodeSelector.hidden=true;
-  showSelector.hidden=false;
+  episodeSelector.hidden = true;
+  showSelector.hidden = false;
   // document.cookie = ".tvmaze.com/__qca ";
   // document.cookie = ".tvmaze.com/_gads";
   // function alertCookie() {
@@ -22,7 +22,7 @@ function setup () {
     makePageForShows (data);
     selectShows (data);
   });
- 
+
   // makePageForShows(allShows);
   //This code is to add Zero before each episode and season under 10
   // for (let i = 0; i < allEpisodes.length; i++) {
@@ -54,15 +54,16 @@ function WordCount (str) {
 }
 
 function makePageForEpisodes (episodeList) {
-  episodeSelector.hidden=false;
-  showSelector.hidden=true;
+  episodeSelector.hidden = false;
+  showSelector.hidden = true;
 
-if(showSelector.hidden){
-//     searchBox=document.getElementById('nav-search');
-//     searchBox.style.marginRight='20rem'
-//       episodeSelector.style.marginRight='20rem';
-secondNav = document.getElementById('secNav').style.justifyContent='space-evenly';
- }
+  if (showSelector.hidden) {
+    //     searchBox=document.getElementById('nav-search');
+    //     searchBox.style.marginRight='20rem'
+    //       episodeSelector.style.marginRight='20rem';
+    secondNav = document.getElementById ('secNav').style.justifyContent =
+      'space-evenly';
+  }
   for (let i = 0; i < episodeList.length; i++) {
     div = document.createElement ('div');
     text = document.createElement ('h5');
@@ -224,7 +225,7 @@ showSelector.addEventListener ('change', function (event) {
     var episodeSelector = document.getElementById ('select');
     episodeSelector.value = 'default';
     episodeSelector.textContent = '';
-    episodeSelector.hidden=true;
+    episodeSelector.hidden = true;
 
     getLiveShows ().then (data => {
       makePageForShows (data);
@@ -306,7 +307,7 @@ episodeSelector.addEventListener ('change', function (e) {
   if (e.target.value === 'default') {
     rootElem.textContent = '';
     getLiveEpisodes (showSelector.value).then (data => {
-     var allEpisodes = data;
+      var allEpisodes = data;
       makePageForEpisodes (allEpisodes);
     });
   } else {
@@ -420,7 +421,7 @@ async function getLiveShows () {
                                     Displaying All The Shows On The Page
 /******************************************************************************************************************/
 function makePageForShows (showsList) {
-document.getElementById('secNav').style.justifyContent='center';
+  document.getElementById ('secNav').style.justifyContent = 'center';
   counter.textContent = `${showsList.length} SHOW(S)`;
   var episodeSelector = document.getElementById ('select');
   episodeSelector.value = 'default';
@@ -448,9 +449,9 @@ document.getElementById('secNav').style.justifyContent='center';
 
         text.addEventListener ('click', function (event) {
           getLiveEpisodes (event.target.id).then (data => {
-           selectEpisodes(data);
-            showSelector.value=event.target.id;
-            showSelector.hidden=true;
+            selectEpisodes (data);
+            showSelector.value = event.target.id;
+            showSelector.hidden = true;
             rootElem.textContent = '';
             makePageForEpisodes (data);
           });
@@ -466,9 +467,30 @@ document.getElementById('secNav').style.justifyContent='center';
         desc.innerHTML = `SUMMARY ${showsList[i].summary}`;
         desc.setAttribute ('class', 'descShowClass');
         div.setAttribute ('class', 'divShowClass');
-        div.appendChild (text);
 
+        let aboutShow = document.createElement ('div');
+        aboutShow.setAttribute ('class', 'divAboutShow');
+        let genres = document.createElement ('div');
+    genres.textContent = `GENRES :\t${showsList[i].genres.toString().replace(/,/g,' | ')}`;
+            genres.setAttribute ('class', 'aboutShow');
+        let status = document.createElement ('div');
+        status.textContent = `STATUS: ${showsList[i].status}`;
+        status.setAttribute ('class', 'aboutShow');
+        let rating = document.createElement ('div');
+        rating.innerHTML = `RATING: ${showsList[i].rating.average}`;
+        console.log (showsList);
+        rating.setAttribute ('class', 'aboutShow');
+        let runTime = document.createElement ('div');
+        runTime.textContent = `RUNTIME: ${showsList[i].runtime}`;
+        runTime.setAttribute ('class', 'aboutShow');
+        aboutShow.appendChild (genres);
+        aboutShow.appendChild (status);
+        aboutShow.appendChild (rating);
+        aboutShow.appendChild (runTime);
+
+        div.appendChild (text);
         div.appendChild (img);
+        div.appendChild (aboutShow);
         // div.appendChild(sumHeader)
         div.appendChild (desc);
 
