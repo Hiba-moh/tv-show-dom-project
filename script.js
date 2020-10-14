@@ -43,7 +43,7 @@ function setup () {
 /******************************************SETUP ENDS**********************************************************/
 
 /**************************************************************************************************************
-                                             Creating Page for show Episodes
+                                       Creating Page for show Episodes
 /**************************************************************************************************************/
 function WordCount (str) {
   let newStr = str.split (' ');
@@ -308,7 +308,6 @@ function searchEpisodes (searchTerm) {
   // var showSelector = document.getElementById ('select-shows');
   getLiveEpisodes (selectedShow).then (data => {
     var allEpisodes = data;
-    console.log (allEpisodes);
 
     let filtered = allEpisodes.filter (episode => {
       if (episode.summary != null)
@@ -339,20 +338,21 @@ function searchEpisodes (searchTerm) {
 var episodeSelector = document.getElementById ('select');
 // const allEpisodes = getAllEpisodes ();
 episodeSelector.addEventListener ('change', function (e) {
-  showSelector = document.getElementById ('select-shows');
+  // showSelector = document.getElementById ('select-shows');
   inputBox.value = '';
   if (e.target.value === 'default') {
     rootElem.textContent = '';
-    getLiveEpisodes (showSelector.value).then (data => {
-      var allEpisodes = data;
-      makePageForEpisodes (allEpisodes);
+
+    getLiveEpisodes (selectedShow).then (data => {
+      console.log (selectedShow);
+      makePageForEpisodes (data);
     });
   } else {
-    getLiveEpisodes (showSelector.value).then (data => {
-      rootElem.textContent = '';
+    getLiveEpisodes (selectedShow).then (data => {
       let episodes = data.filter (function (item) {
         return item.name === e.target.value;
       });
+      rootElem.textContent = '';
       makePageForEpisodes (episodes);
     });
   }
@@ -485,7 +485,8 @@ function makePageForShows (showsList) {
         text.setAttribute ('id', showsList[i].id);
 
         text.addEventListener ('click', function (event) {
-          getLiveEpisodes (event.target.id).then (data => {
+          selectedShow = event.target.id;
+          getLiveEpisodes (selectedShow).then (data => {
             selectEpisodes (data);
             showSelector.value = event.target.id;
             showSelector.hidden = true;
