@@ -5,6 +5,7 @@ const rootElem = document.getElementById ('root');
 //const allEpisodes = getAllEpisodes ();
 var allEpisodes = [];
 var allShows = [];
+var selectBox = document.getElementById ('select-shows');
 /******************************************SETUP STARTS**********************************************************/
 
 function setup () {
@@ -42,7 +43,7 @@ function setup () {
 /******************************************SETUP ENDS**********************************************************/
 
 /**************************************************************************************************************
-                                             creating my page HTML-elements
+                                             Creating Page for show Episodes
 /**************************************************************************************************************/
 function WordCount (str) {
   let newStr = str.split (' ');
@@ -265,13 +266,49 @@ showSelector.addEventListener ('change', function (event) {
 var inputBox = document.getElementById ('textBox');
 inputBox.addEventListener ('keyup', function (e) {
   selectBox.value = 'default';
-  search (e.target.value.toLowerCase ());
+  // console.log ('searching');
+  // console.log(showSelector)
+  if (!showSelector.hidden) {
+    searchShows (e.target.value.toLowerCase ());
+  } else {
+    {
+      searchEpisodes (e.target.value.toLowerCase ());
+    }
+  }
 });
 // search box function
-function search (searchTerm) {
-  var showSelector = document.getElementById ('select-shows');
-  getLiveEpisodes (showSelector.value).then (data => {
+
+function searchShows (searchTerm) {
+  getLiveShows ().then (data => {
+    var allShows = data;
+
+    let filtered = allShows.filter (episode => {
+      if (episode.summary != null)
+        return (
+          episode.name.toLowerCase ().includes (searchTerm) ||
+          episode.summary.toLowerCase ().includes (searchTerm)
+        );
+      else return episode.name.toLowerCase ().includes (searchTerm);
+    });
+
+    if (filtered.length > 0) {
+      rootElem.textContent = '';
+      makePageForShows (filtered);
+      let counter = document.getElementById ('counter');
+      counter.textContent = `${filtered.length} SHOW(s)`;
+    } else {
+      rootElem.textContent = 'Sorry no match for your search .. ';
+      let counter = document.getElementById ('counter');
+      counter.textContent = `0 SHOW(s)`;
+    }
+  });
+}
+
+function searchEpisodes (searchTerm) {
+  // var showSelector = document.getElementById ('select-shows');
+  getLiveEpisodes (selectedShow).then (data => {
     var allEpisodes = data;
+    console.log (allEpisodes);
 
     let filtered = allEpisodes.filter (episode => {
       if (episode.summary != null)
@@ -471,14 +508,16 @@ function makePageForShows (showsList) {
         let aboutShow = document.createElement ('div');
         aboutShow.setAttribute ('class', 'divAboutShow');
         let genres = document.createElement ('div');
-    genres.textContent = `GENRES :\t${showsList[i].genres.toString().replace(/,/g,' | ')}`;
-            genres.setAttribute ('class', 'aboutShow');
+        genres.textContent = `GENRES :\t${showsList[i].genres
+          .toString ()
+          .replace (/,/g, ' | ')}`;
+        genres.setAttribute ('class', 'aboutShow');
         let status = document.createElement ('div');
         status.textContent = `STATUS: ${showsList[i].status}`;
         status.setAttribute ('class', 'aboutShow');
         let rating = document.createElement ('div');
         rating.innerHTML = `RATING: ${showsList[i].rating.average}`;
-        console.log (showsList);
+        // console.log (showsList);
         rating.setAttribute ('class', 'aboutShow');
         let runTime = document.createElement ('div');
         runTime.textContent = `RUNTIME: ${showsList[i].runtime}`;
