@@ -39,10 +39,6 @@ function makePageForEpisodes (episodeList) {
   showBtn.hidden = false;
   showSelector.hidden = true;
 
-  if (showSelector.hidden) {
-    // secondNav = document.getElementById ('secNav').style.justifyContent =
-    //   'space-evenly';
-  }
   for (let i = 0; i < episodeList.length; i++) {
     div = document.createElement ('div');
     text = document.createElement ('h5');
