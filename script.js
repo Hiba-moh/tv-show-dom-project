@@ -9,9 +9,9 @@ var showBtn = document.getElementById ('showBtn');
 /******************************************SETUP STARTS**********************************************************/
 
 function setup () {
-  episodeSelector.hidden = true;
-  showBtn.hidden = true;
-  showSelector.hidden = false;
+  episodeSelector.style.display = 'none';
+  showBtn.style.display = 'none';
+  showSelector.style.display = 'block';
   getLiveShows ().then (data => {
     allShows = data;
     makePageForShows (data);
@@ -35,9 +35,9 @@ function WordCount (str) {
 }
 
 function makePageForEpisodes (episodeList) {
-  episodeSelector.hidden = false;
-  showBtn.hidden = false;
-  showSelector.hidden = true;
+  episodeSelector.style.display = 'block';
+  showBtn.style.display = 'block';
+  showSelector.style.display = 'none';
 
   for (let i = 0; i < episodeList.length; i++) {
     div = document.createElement ('div');
@@ -172,8 +172,8 @@ showSelector.addEventListener ('change', function (event) {
     var episodeSelector = document.getElementById ('select');
     episodeSelector.value = 'default';
     episodeSelector.textContent = '';
-    episodeSelector.hidden = true;
-    showBtn.hidden = true;
+    episodeSelector.style.display = 'none';
+    showBtn.style.display = 'none';
 
     getLiveShows ().then (data => {
       makePageForShows (data);
@@ -201,7 +201,7 @@ var inputBox = document.getElementById ('textBox');
 inputBox.addEventListener ('keyup', function (e) {
   selectBox.value = 'default';
 
-  if (!showSelector.hidden) {
+  if (!showSelector.style.display === 'none') {
     searchShows (e.target.value.toLowerCase ());
   } else {
     {
@@ -382,7 +382,7 @@ function makePageForShows (showsList) {
           getLiveEpisodes (selectedShow).then (data => {
             selectEpisodes (data);
             showSelector.value = event.target.id;
-            showSelector.hidden = true;
+            showSelector.style.display = 'none';
             rootElem.textContent = '';
             makePageForEpisodes (data);
           });
