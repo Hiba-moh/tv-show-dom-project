@@ -2,42 +2,22 @@
 var selectedShowImg;
 var selectedShow;
 const rootElem = document.getElementById ('root');
-//const allEpisodes = getAllEpisodes ();
 var allEpisodes = [];
 var allShows = [];
 var selectBox = document.getElementById ('select-shows');
+var showBtn = document.getElementById ('showBtn');
 /******************************************SETUP STARTS**********************************************************/
 
 function setup () {
   episodeSelector.hidden = true;
+  showBtn.hidden = true;
   showSelector.hidden = false;
-  // document.cookie = ".tvmaze.com/__qca ";
-  // document.cookie = ".tvmaze.com/_gads";
-  // function alertCookie() {
-  //   alert(document.cookie);
-  // }
-  // allShows = getAllShows();
-
   getLiveShows ().then (data => {
     allShows = data;
     makePageForShows (data);
     selectShows (data);
   });
 
-  // makePageForShows(allShows);
-  //This code is to add Zero before each episode and season under 10
-  // for (let i = 0; i < allEpisodes.length; i++) {
-  //   if (allEpisodes[i].season < 10) {
-  //     allEpisodes[i].season = '0' + allEpisodes[i].season;
-  //   }
-  //   if (allEpisodes[i].number < 10) {
-  //     allEpisodes[i].number = '0' + allEpisodes[i].number;
-  //   }
-  // }
-  //select (allEpisodes);
-
-  // getLiveEpisodes(526);
-  //  makePageForEpisodes (allEpisodes);
   updateVisitCount ();
 }
 /******************************************SETUP ENDS**********************************************************/
@@ -56,14 +36,12 @@ function WordCount (str) {
 
 function makePageForEpisodes (episodeList) {
   episodeSelector.hidden = false;
+  showBtn.hidden = false;
   showSelector.hidden = true;
 
   if (showSelector.hidden) {
-    //     searchBox=document.getElementById('nav-search');
-    //     searchBox.style.marginRight='20rem'
-    //       episodeSelector.style.marginRight='20rem';
-    secondNav = document.getElementById ('secNav').style.justifyContent =
-      'space-evenly';
+    // secondNav = document.getElementById ('secNav').style.justifyContent =
+    //   'space-evenly';
   }
   for (let i = 0; i < episodeList.length; i++) {
     div = document.createElement ('div');
@@ -77,26 +55,6 @@ function makePageForEpisodes (episodeList) {
       img.setAttribute ('src', episodeList[i].image.medium);
     } else {
       img.setAttribute ('src', `${selectedShowImg}`);
-
-      // var selectBox = document.getElementById ('select-shows');
-      // selectedShow = selectBox.value;
-      // allShows.forEach(item=>{
-      //   if(item.id===selectedShow){
-      //     console.log('that is it')
-      //     img.setAttribute('src',`${item.image.medium}`);
-      //   }
-
-      // })
-
-      // getLiveShows().then(data=>{
-      //   data.forEach(item=>{
-      //     if(item.id===selectedShow){
-      //       selectedShowImg=item.image.medium;
-      //       img.setAttribute('src',selectedShowImg);
-      //       console.log(selectedShowImg)
-      //     }
-      //   })
-      // })
     }
 
     img.setAttribute ('class', 'imgClass');
@@ -121,9 +79,6 @@ function makePageForEpisodes (episodeList) {
     div.appendChild (sumHeader);
     div.appendChild (desc);
 
-    /*This code gives all of the div elements same id as the episode 
-    (it makes it easy to grab the episode when it has been clicked)*/
-
     let keyId = `${episodeList[i].url}`;
     div.id = keyId;
     text.id = keyId;
@@ -135,7 +90,6 @@ function makePageForEpisodes (episodeList) {
     rootElem.appendChild (div);
 
     div.addEventListener ('click', function (event) {
-      // window.location=event.target.id;
       window.open (event.target.id);
     });
   }
@@ -153,7 +107,6 @@ function makePageForEpisodes (episodeList) {
   /***************************************************************************************************************/
 
 function selectEpisodes (episodeList) {
-  // console.log(episodeList)
   for (let i = 0; i < episodeList.length; i++) {
     if (episodeList[i].season < 10) {
       episodeList[i].season = '0' + episodeList[i].season;
@@ -170,7 +123,6 @@ function selectEpisodes (episodeList) {
   option.setAttribute ('value', 'default');
   option.appendChild (text);
   EpisodeSelector.append (option);
-  // select.insertBefore (option, select.firstChild);
 
   for (let j = 0; j < episodeList.length; j++) {
     var option = document.createElement ('option');
@@ -179,7 +131,6 @@ function selectEpisodes (episodeList) {
     );
     option.setAttribute ('value', episodeList[j].name);
     option.appendChild (text);
-    // select.insertBefore (option, select.lastChild);
     EpisodeSelector.append (option);
   }
 }
@@ -217,16 +168,16 @@ function selectShows (allShows) {
                            And Displaying The Selected Show Episodes On the Page
 /****************************************************************************************************************/
 
-// const allEpisodes = getAllEpisodes ();
 var showSelector = document.getElementById ('select-shows');
 showSelector.addEventListener ('change', function (event) {
   selectedShow = event.target.value;
-  // allShows = getAllShows();
+
   if (selectedShow == 'default') {
     var episodeSelector = document.getElementById ('select');
     episodeSelector.value = 'default';
     episodeSelector.textContent = '';
     episodeSelector.hidden = true;
+    showBtn.hidden = true;
 
     getLiveShows ().then (data => {
       makePageForShows (data);
@@ -238,7 +189,6 @@ showSelector.addEventListener ('change', function (event) {
       }
     }
 
-    // select = document.getElementById ('select');
     rootElem.textContent = '';
     getLiveEpisodes (selectedShow).then (function (data) {
       selectEpisodes (data);
@@ -248,26 +198,13 @@ showSelector.addEventListener ('change', function (event) {
 });
 
 /****************************************************************************************************************
-                                             When Click Show Title
-/****************************************************************************************************************/
-// var clickedShow = document.querySelector('h4Showclass');
-// clickedShow.addEventListener('click',function(event){
-//   getLiveEpisodes(event.target.id).then(data=>{
-//     console.log(data);
-//        makePageForEpisodes(data);
-//      })
-
-// })
-
-/****************************************************************************************************************
                                               Search Text Box 
 /****************************************************************************************************************/
 
 var inputBox = document.getElementById ('textBox');
 inputBox.addEventListener ('keyup', function (e) {
   selectBox.value = 'default';
-  // console.log ('searching');
-  // console.log(showSelector)
+
   if (!showSelector.hidden) {
     searchShows (e.target.value.toLowerCase ());
   } else {
@@ -276,19 +213,27 @@ inputBox.addEventListener ('keyup', function (e) {
     }
   }
 });
-// search box function
 
 function searchShows (searchTerm) {
   getLiveShows ().then (data => {
     var allShows = data;
-
-    let filtered = allShows.filter (episode => {
-      if (episode.summary != null)
+    console.log (data);
+    let filtered = allShows.filter (show => {
+      var sorted = [];
+      for (var i = 0; i < show.genres.length; i++) {
+        sorted.push (show.genres[i].toLowerCase ());
+      }
+      if (show.summary != null)
         return (
-          episode.name.toLowerCase ().includes (searchTerm) ||
-          episode.summary.toLowerCase ().includes (searchTerm)
+          show.name.toLowerCase ().includes (searchTerm) ||
+          sorted.includes (searchTerm) ||
+          show.summary.toLowerCase ().includes (searchTerm)
         );
-      else return episode.name.toLowerCase ().includes (searchTerm);
+      else
+        return (
+          show.name.toLowerCase ().includes (searchTerm) ||
+          sorted.includes (searchTerm)
+        );
     });
 
     if (filtered.length > 0) {
@@ -305,7 +250,6 @@ function searchShows (searchTerm) {
 }
 
 function searchEpisodes (searchTerm) {
-  // var showSelector = document.getElementById ('select-shows');
   getLiveEpisodes (selectedShow).then (data => {
     var allEpisodes = data;
 
@@ -336,9 +280,7 @@ function searchEpisodes (searchTerm) {
 /****************************************************************************************************************/
 
 var episodeSelector = document.getElementById ('select');
-// const allEpisodes = getAllEpisodes ();
 episodeSelector.addEventListener ('change', function (e) {
-  // showSelector = document.getElementById ('select-shows');
   inputBox.value = '';
   if (e.target.value === 'default') {
     rootElem.textContent = '';
@@ -373,15 +315,6 @@ function myFunction (event) {
   });
 }
 
-/*************************************************************************************************************** 
-                                     Making Shows cards Display their Episodes when Clicked
-/***************************************************************************************************************/
-
-// text.onclick = getLiveEpisodes(showsList[i].id).then(data=>{
-//   console.log(data);
-//      makePageForEpisodes(data);
-//    })
-
 /****************************************************************************************************************
                                      page viewers counter
 /****************************************************************************************************************/
@@ -408,24 +341,6 @@ async function getLiveEpisodes (showId) {
   );
   let data = await response.json ();
   return data;
-
-  // fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
-  // .then(response=>{
-  //   return response.json();
-  // })
-  // .then(data=>{
-  //   allEpisodes = data;
-  //   makePageForEpisodes(allEpisodes);
-  //   select(allEpisodes);
-  // })
-  // .catch(error=>{
-  //   // allEpisodes.forEach(function(element,index){
-  //   //   if(!element.image){
-  //   //     delete element[index];
-  //   //   }
-  //   // })
-  //   alert(error);
-  // })
 }
 
 /*****************************************************************************************************************
@@ -435,30 +350,13 @@ async function getLiveShows () {
   let response = await fetch (`https://api.tvmaze.com/shows`);
   let data = await response.json ();
   return data;
-
-  // fetch(`https://api.tvmaze.com/shows`)
-  // .then(response=>{
-  //   if(!response.ok){
-  //     throw Error('error');
-  //   }
-  //   return response.json();
-  // })
-  // .then(data=>{
-  //   allShows = data;
-  //   makePageForShows(allShows);
-  //   selectShows(allShows);
-  //   console.log(data)
-  // })
-  // .catch(error=>{
-  //   alert(error);
-  // })
 }
 
 /*****************************************************************************************************************
                                     Displaying All The Shows On The Page
 /******************************************************************************************************************/
 function makePageForShows (showsList) {
-  document.getElementById ('secNav').style.justifyContent = 'center';
+  // document.getElementById ('secNav').style.justifyContent = 'center';
   counter.textContent = `${showsList.length} SHOW(S)`;
   var episodeSelector = document.getElementById ('select');
   episodeSelector.value = 'default';
@@ -466,7 +364,6 @@ function makePageForShows (showsList) {
   var showSelector = document.getElementById ('select-shows');
   showSelector.value = 'default';
 
-  // console.log(showsList);
   let names = [];
   showsList.forEach (element => {
     names.push (element.name);
@@ -498,9 +395,7 @@ function makePageForShows (showsList) {
         img = document.createElement ('img');
         img.setAttribute ('src', showsList[i].image.medium);
         img.setAttribute ('class', 'imgShowClass');
-        // sumHeader=document.createElement('h5')
-        // sumHeader.setAttribute('class','sumShowClass');
-        // sumHeader.textContent ='Summary'
+
         desc = document.createElement ('p');
         desc.innerHTML = `SUMMARY ${showsList[i].summary}`;
         desc.setAttribute ('class', 'descShowClass');
@@ -518,7 +413,6 @@ function makePageForShows (showsList) {
         status.setAttribute ('class', 'aboutShow');
         let rating = document.createElement ('div');
         rating.innerHTML = `RATING: ${showsList[i].rating.average}`;
-        // console.log (showsList);
         rating.setAttribute ('class', 'aboutShow');
         let runTime = document.createElement ('div');
         runTime.textContent = `RUNTIME: ${showsList[i].runtime}`;
@@ -531,17 +425,8 @@ function makePageForShows (showsList) {
         div.appendChild (text);
         div.appendChild (img);
         div.appendChild (aboutShow);
-        // div.appendChild(sumHeader)
         div.appendChild (desc);
 
-        /*This code gives all of the div elements same id as the episode 
-    (it makes it easy to grab the episode when it has been clicked)*/
-        // let keyId = `${showsList[i].id}`;
-        // div.id = keyId;
-        // text.id = keyId;
-        // img.id = keyId;
-        // desc.id = keyId;
-        // desc.firstChild.id = keyId;
         rootElem.appendChild (div);
       }
     }

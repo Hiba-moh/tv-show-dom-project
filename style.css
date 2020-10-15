@@ -45,7 +45,7 @@ nav {
   margin: 0; 
 }
 #nav-search {
-  text-align: right;
+  /* text-align: right; */
   padding: 1rem 0.2rem;
   margin: 0;
 }
@@ -62,7 +62,7 @@ nav {
 }
 
 #select,#select-shows,
-button,
+button,#showBtn,
 #textBox {
   padding: 0.5rem 0.75rem;
   color: #e5e5e5;
@@ -273,4 +273,18 @@ font-size: large;
   /* background: linear-gradient(#161d27,#33445b); */
 
 
+}
+#showBtn{
+  height: 40px;
+outline: none;
+border-color: #161d27;
+}
+#showBtn:hover{
+  background-color:white;
+  color: #161d27;
+}
+#showBtnDiv{
+  text-align: right;
+  padding: 1rem 0.5rem;
+  margin: 0; 
 }
