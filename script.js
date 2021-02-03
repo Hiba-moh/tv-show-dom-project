@@ -201,7 +201,7 @@ var inputBox = document.getElementById ('textBox');
 inputBox.addEventListener ('keyup', function (e) {
   selectBox.value = 'default';
 
-  if (!showSelector.style.display === 'none') {
+  if (showSelector.style.display !== 'none') {
     searchShows (e.target.value.toLowerCase ());
   } else {
     {
